@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
+import { UIAdaptor } from './ui-adaptors/UIAdaptor';
 
-export interface SwrPaginationProps {
-  children: ReactNode;
+export interface SwrPaginationOptions {
+  uiAdaptor: UIAdaptor;
 }
 
-export function SwrPagination({ children }: SwrPaginationProps) {
-  return <div className="SwrPagination">{children}</div>;
+export function useSWRPagination(url: string, options?: SwrPaginationOptions) {
+  return null;
 }
