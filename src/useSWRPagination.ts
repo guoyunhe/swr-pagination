@@ -29,6 +29,11 @@ export function useSWRPagination(url: string, options?: SWRPaginationOptions) {
 
   const { data: result, error, isValidating, isLoading } = useSWR(swrKey, options?.swrConfig);
 
+  const paginationProps = useMemo(
+    () => uiAdaptor.getPaginationProps(page, setPage, pageSize, setPageSize, total),
+    [page, setPage, pageSize, setPageSize, total, uiAdaptor]
+  );
+
   useEffect(() => {
     const parsed = apiAdaptor.parseResult(result);
     if (typeof parsed.total === 'number') {
@@ -39,10 +44,10 @@ export function useSWRPagination(url: string, options?: SWRPaginationOptions) {
     }
   }, [result, apiAdaptor]);
 
-  const paginationProps = useMemo(
-    () => uiAdaptor.getPaginationProps(page, setPage, pageSize, setPageSize, total),
-    [page, setPage, pageSize, setPageSize, total, uiAdaptor]
-  );
+  // Reset page number when changing URL
+  useEffect(() => {
+    setPage(1);
+  }, [url]);
 
   return {
     error,
