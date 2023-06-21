@@ -1,6 +1,6 @@
 import { APIAdaptor } from '../types';
 
-export const laravelAdaptor: APIAdaptor = {
+export const adonis5Adaptor: APIAdaptor = {
   buildQuery: (url, page, pageSize) => {
     const [pathname, search] = url.split('?');
     const searchParams = new URLSearchParams(search);
@@ -12,7 +12,7 @@ export const laravelAdaptor: APIAdaptor = {
   parseResult: (result) => {
     return {
       data: result?.data || [],
-      total: result?.total || 0,
+      total: result?.meta?.total || 0,
     };
   },
 };

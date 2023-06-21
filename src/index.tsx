@@ -1,4 +1,5 @@
 export * from './SWRPaginationConfigProvider';
+export * from './api-adaptors/adonis5';
 export * from './api-adaptors/laravel';
 export * from './ui-adaptors/antd5';
 export * from './ui-adaptors/mui5';
