@@ -11,8 +11,8 @@ export const adonis5Adaptor: APIAdaptor = {
 
   parseResult: (result) => {
     return {
-      data: result?.data || [],
-      total: result?.meta?.total || 0,
+      data: result?.data,
+      total: result?.meta?.total,
     };
   },
 };

@@ -11,8 +11,8 @@ export const laravelAdaptor: APIAdaptor = {
 
   parseResult: (result) => {
     return {
-      data: result?.data || [],
-      total: result?.total || 0,
+      data: result?.data,
+      total: result?.total,
     };
   },
 };

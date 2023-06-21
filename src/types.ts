@@ -20,8 +20,8 @@ export interface UIAdaptor {
 }
 
 export interface ParsedResult {
-  data: any[];
-  total: number;
+  data?: any[];
+  total?: number;
 }
 
 export interface GetPaginationOptions {

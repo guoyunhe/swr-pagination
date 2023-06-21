@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import { laravelAdaptor } from './api-adaptors/laravel';
 import { SWRPaginationConfig } from './types';
@@ -19,15 +19,25 @@ export function useSWRPagination(url: string, options?: SWRPaginationOptions) {
   const [pageSize, setPageSize] = useState(
     options?.defaultPageSize || config.defaultPageSize || 10
   );
+  const [total, setTotal] = useState(0);
+  const [data, setData] = useState<any[]>([]);
 
   const swrKey = useMemo(
     () => apiAdaptor.buildQuery(url, page, pageSize),
     [url, page, pageSize, apiAdaptor]
   );
 
-  const { data: result, error } = useSWR(swrKey, options?.swrConfig);
+  const { data: result } = useSWR(swrKey, options?.swrConfig);
 
-  const { data, total } = useMemo(() => apiAdaptor.parseResult(result), [result, apiAdaptor]);
+  useEffect(() => {
+    const parsed = apiAdaptor.parseResult(result);
+    if (typeof parsed.total === 'number') {
+      setTotal(parsed.total);
+    }
+    if (Array.isArray(parsed.data)) {
+      setData(parsed.data);
+    }
+  }, [result, apiAdaptor]);
 
   const paginationProps = useMemo(
     () => uiAdaptor.getPaginationProps(page, setPage, pageSize, setPageSize, total),
