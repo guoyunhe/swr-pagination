@@ -27,7 +27,7 @@ export function useSWRPagination(url: string, options?: SWRPaginationOptions) {
     [url, page, pageSize, apiAdaptor]
   );
 
-  const { data: result } = useSWR(swrKey, options?.swrConfig);
+  const { data: result, error, isValidating, isLoading } = useSWR(swrKey, options?.swrConfig);
 
   useEffect(() => {
     const parsed = apiAdaptor.parseResult(result);
@@ -44,5 +44,16 @@ export function useSWRPagination(url: string, options?: SWRPaginationOptions) {
     [page, setPage, pageSize, setPageSize, total, uiAdaptor]
   );
 
-  return { page, setPage, pageSize, setPageSize, data, total, paginationProps };
+  return {
+    error,
+    isValidating,
+    isLoading,
+    data,
+    total,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
+    paginationProps,
+  };
 }
