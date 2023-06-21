@@ -27,7 +27,13 @@ export function useSWRPagination(url: string, options?: SWRPaginationOptions) {
     [url, page, pageSize, apiAdaptor]
   );
 
-  const { data: result, error, isValidating, isLoading } = useSWR(swrKey, options?.swrConfig);
+  const {
+    data: result,
+    mutate,
+    error,
+    isValidating,
+    isLoading,
+  } = useSWR(swrKey, options?.swrConfig);
 
   const paginationProps = useMemo(
     () => uiAdaptor.getPaginationProps(page, setPage, pageSize, setPageSize, total),
@@ -50,6 +56,7 @@ export function useSWRPagination(url: string, options?: SWRPaginationOptions) {
   }, [url]);
 
   return {
+    mutate,
     error,
     isValidating,
     isLoading,
