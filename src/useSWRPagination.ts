@@ -25,7 +25,7 @@ export function useSWRPagination(url: string, options?: SWRPaginationOptions) {
     [url, page, pageSize, apiAdaptor]
   );
 
-  const { data: result } = useSWR(swrKey, options?.swrConfig);
+  const { data: result, error } = useSWR(swrKey, options?.swrConfig);
 
   const { data, total } = useMemo(() => apiAdaptor.parseResult(result), [result, apiAdaptor]);
 
