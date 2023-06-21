@@ -1,6 +1,6 @@
 {
   "name": "swr-pagination",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Hook to connect SWR and Pagination components from Ant Design, Fusion Design, MUI, React Bootstrap, etc",
   "keywords": [
     "react",
