@@ -1,9 +1,5 @@
-import { UIAdaptor } from './ui-adaptors/UIAdaptor';
-
-export interface SwrPaginationOptions {
-  uiAdaptor: UIAdaptor;
-}
-
-export function useSWRPagination(url: string, options?: SwrPaginationOptions) {
-  return null;
-}
+export * from './SWRPaginationConfigProvider';
+export * from './api-adaptors/laravel';
+export * from './ui-adaptors/antd5';
+export * from './useSWRPagination';
+export * from './useSWRPaginationConfig';
